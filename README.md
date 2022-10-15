@@ -1,21 +1,39 @@
-# mpv-copyTime
-Copy the current time of the video to clipboard.
+# mpv-copyStuff
 
-Get the current time of the video and copy it to the clipboard with the format HH:MM:SS.MS, where MS (milliseconds) is 3 digits.
+This script copies to clipboard the:
+- Filename (With Extension)
+- Full Filename Path
+- Relative Filename Path (Parent Directory + Filename)
+- Current Video Time (HH:MM:SS.MS)
+- Current Displayed Subtitle Text
 
-By default, the script is bound to "Ctrl + c"
+## Installation
 
-# Installation
-
-Put the script `copyTime.lua` in your scripts folder, usually in:
-*  Windows: `"%APPDATA%\mpv\scripts"`.
-*  Linux and Mac: `"~/.config/mpv/scripts/"`.
+Put the script `copyStuff.lua` in your scripts folder, usually in:
+- Windows: `"C:\Users\Username\AppData\Roaming\mpv\scripts"`.
+- Linux and Mac: `"~/.config/mpv/scripts/"`.
 
 To work, the script needs:
-* Windows: `Powershell`.
-* Linux/X11: `xclip`.
-* Linux/Wayland : `xclip` or `wl-clipboard`.
-* MacOS: `pbcopy` (not tested). 
+- Windows: `Powershell`.
+- Linux/X11: `xclip`.
+- Linux/Wayland : `xclip` or `wl-clipboard`.
+- MacOS: `pbcopy` (not tested).
 
-# Screenshot
-![ss1](https://user-images.githubusercontent.com/40000640/111867156-02f68a00-8951-11eb-84a8-c78616c68aa3.PNG)
+## Hotkeys
+
+| What is Copied                       | Hotkey     |
+| ------------------------------------ | ---------- |
+| **Filename**                         | **CTRL+f** |
+| **Full Filename Path**               | **CTRL+p** |
+| **Relative Filename Path**           | **CTRL+r** |
+| **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
+| **Current Displayed Subtitle Text**  | **CTRL+s** |
+
+
+# Screenshots
+
+![ss1](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_01)
+![ss2](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_02)
+![ss3](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_03)
+![ss4](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_04)
+![ss5](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_05)
