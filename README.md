@@ -21,6 +21,8 @@ To work, the script needs:
 
 ## Hotkeys
 
+<div align="center">
+
 | What is Copied                       | Hotkey     |
 | ------------------------------------ | ---------- |
 | **Filename**                         | **CTRL+f** |
@@ -29,6 +31,7 @@ To work, the script needs:
 | **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
 | **Current Displayed Subtitle Text**  | **CTRL+s** |
 
+</div>
 
 # Screenshots
 
