@@ -60,7 +60,7 @@ local function set_clipboard(text)
     end
 end
 
--- Copy Time Function
+-- Copy Time
 local function copyTime()
     local time_pos = mp.get_property_number("time-pos")
     local minutes, remainder = divmod(time_pos, 60)
@@ -75,7 +75,7 @@ local function copyTime()
     end
 end
 
--- Copy Filename with Extension Function
+-- Copy Filename with Extension
 local function copyFilename()
     local filename = string.format("%s", mp.get_property_osd("filename"))
     if set_clipboard(filename) then
@@ -127,17 +127,39 @@ end
 
 -- Copy Current Displayed Subtitle
 local function copySubtitle()
-    local filename = string.format("%s", mp.get_property_osd("sub-text"))
+    local subtitle = string.format("%s", mp.get_property_osd("sub-text"))
 
-    if filename == "" then
+    if subtitle == "" then
         mp.osd_message("There are no displayed subtitles.")
         return
     end
 
-    if set_clipboard(filename) then
-        mp.osd_message(string.format("Displayed Subtitle Copied to Clipboard: %s", filename))
+    if set_clipboard(subtitle) then
+        mp.osd_message(string.format("Displayed Subtitle Copied to Clipboard: %s", subtitle))
     else
         mp.osd_message("Failed to copy displayed subtitle to clipboard")
+    end
+end
+
+-- Copy Current Video Duration
+local function copyDuration()
+    local duration = string.format("%s", mp.get_property_osd("duration"))
+
+    if set_clipboard(duration) then
+        mp.osd_message(string.format("Video Duration Copied to Clipboard: %s", duration))
+    else
+        mp.osd_message("Failed to copy video duration to clipboard")
+    end
+end
+
+-- Copy Current Video Metadata
+local function copyMetadata()
+    local metadata = string.format("%s", mp.get_property_osd("metadata"))
+
+    if set_clipboard(metadata) then
+        mp.osd_message(string.format("Video Metadata Copied to Clipboard: %s", metadata))
+    else
+        mp.osd_message("Failed to copy metadata to clipboard")
     end
 end
 
@@ -152,3 +174,5 @@ mp.add_key_binding("Ctrl+f", "copyFilename", copyFilename)
 mp.add_key_binding("Ctrl+p", "copyFullPath", copyFullPath)
 mp.add_key_binding("Ctrl+r", "copyRelativePath", copyRelativePath)
 mp.add_key_binding("Ctrl+s", "copySubtitle", copySubtitle)
+mp.add_key_binding("Ctrl+d", "copyDuration", copyDuration)
+mp.add_key_binding("Ctrl+m", "copyMetadata", copyMetadata)

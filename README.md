@@ -30,6 +30,8 @@ To work, the script needs:
 | **Relative Filename Path**           | **CTRL+r** |
 | **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
 | **Current Displayed Subtitle Text**  | **CTRL+s** |
+| **Video Duration**                   | **CTRL+d** |
+| **Video Metadata**                   | **CTRL+m** |
 
 </div>
 
