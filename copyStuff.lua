@@ -47,7 +47,7 @@ end
 
 local function set_clipboard(text)
     if platform == WINDOWS then
-        mp.commandv("run", "powershell", "set-clipboard", text)
+        mp.commandv("run", "powershell", "set-clipboard", table.concat({'"', text, '"'}))
         return true
     elseif (platform == UNIX and clipboard_cmd) then
         local pipe = io.popen(clipboard_cmd, "w")
