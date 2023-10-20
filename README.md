@@ -37,8 +37,8 @@ To work, the script needs:
 
 # Screenshots
 
-![ss1](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_01.png)
-![ss2](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_02.png)
-![ss3](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_03.png)
-![ss4](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_04.png)
-![ss5](https://raw.githubusercontent.com/0xR3V/screenshots/main/mpv-copyStuff/example_05.png)
+![ss1](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_01.png)
+![ss2](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_02.png)
+![ss3](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_03.png)
+![ss4](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_04.png)
+![ss5](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_05.png)
