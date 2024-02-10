@@ -2,10 +2,12 @@ require 'mp'
 require 'mp.msg'
 
 -- Copy:
--- Filename
+-- Filename or URL
 -- Full Filename Path
 -- Current Video Time
+-- Current Video Duration
 -- Current Displayed Subtitle
+-- Video Metadata
 
 WINDOWS = 2
 UNIX = 3
@@ -82,6 +84,7 @@ local function copyFilename()
     local succ_message = "Filename Copied to Clipboard"
     local fail_message = "Failed to copy filename to clipboard"
 
+    -- If filename doesn't have an extension then it is a URL.
     if not extension then
         filename = mp.get_property_osd("path")
 
