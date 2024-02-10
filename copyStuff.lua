@@ -77,7 +77,7 @@ end
 
 -- Copy Filename with Extension
 local function copyFilename()
-    local filename = string.format("%s", mp.get_property_osd("filename"))
+    local filename = string.format("%s", mp.get_property_osd("path"))
     if set_clipboard(filename) then
         mp.osd_message(string.format("Filename Copied to Clipboard: %s", filename))
     else
