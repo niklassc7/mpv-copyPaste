@@ -3,7 +3,6 @@
 This script copies to clipboard the:
 - Filename (With Extension) or URL Link
 - Full Filename Path
-- Relative Filename Path (Parent Directory + Filename)
 - Current Video Time (HH:MM:SS.MS)
 - Current Displayed Subtitle Text
 
@@ -27,7 +26,6 @@ To work, the script needs:
 | ------------------------------------ | ---------- |
 | **Filename or URL Link**             | **CTRL+f** |
 | **Full Filename Path**               | **CTRL+p** |
-| **Relative Filename Path**           | **CTRL+r** |
 | **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
 | **Current Displayed Subtitle Text**  | **CTRL+s** |
 | **Video Duration**                   | **CTRL+d** |
