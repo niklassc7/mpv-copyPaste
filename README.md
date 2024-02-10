@@ -1,7 +1,7 @@
 # mpv-copyStuff
 
 This script copies to clipboard the:
-- Filename (With Extension)
+- Filename (With Extension) or URL Link
 - Full Filename Path
 - Relative Filename Path (Parent Directory + Filename)
 - Current Video Time (HH:MM:SS.MS)
@@ -25,7 +25,7 @@ To work, the script needs:
 
 | What is Copied                       | Hotkey     |
 | ------------------------------------ | ---------- |
-| **Filename**                         | **CTRL+f** |
+| **Filename or URL Link**             | **CTRL+f** |
 | **Full Filename Path**               | **CTRL+p** |
 | **Relative Filename Path**           | **CTRL+r** |
 | **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
