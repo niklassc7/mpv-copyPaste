@@ -4,7 +4,6 @@ require 'mp.msg'
 -- Copy:
 -- Filename
 -- Full Filename Path
--- Relative Filename Path
 -- Current Video Time
 -- Current Displayed Subtitle
 
@@ -112,31 +111,6 @@ local function copyFullPath()
     end
 end
 
--- Copy Relative Filename Path (Parent Directory + Filename)
-local function getCWD(s, delimiter)
-    devided_full_path = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        table.insert(devided_full_path, match);
-    end
-    return devided_full_path[#devided_full_path+1-1];
-end
-
-local function copyRelativePath()
-    local full_path = string.format("%s", mp.get_property_osd("working-directory"))
-
-    if platform  == WINDOWS then
-        relative_path = string.format("%s\\%s", getCWD(full_path, "\\"), mp.get_property_osd("filename"))
-    else
-        relative_path = string.format("%s/%s", getCWD(full_path, "/"), mp.get_property_osd("filename"))
-    end
-
-    if set_clipboard(relative_path) then
-        mp.osd_message(string.format("Relative Filename Path Copied to Clipboard: %s", relative_path))
-    else
-        mp.osd_message("Failed to copy relative filename path to clipboard")
-    end
-end
-
 -- Copy Current Displayed Subtitle
 local function copySubtitle()
     local subtitle = string.format("%s", mp.get_property_osd("sub-text"))
@@ -184,7 +158,6 @@ end
 mp.add_key_binding("Ctrl+t", "copyTime", copyTime)
 mp.add_key_binding("Ctrl+f", "copyFilename", copyFilename)
 mp.add_key_binding("Ctrl+p", "copyFullPath", copyFullPath)
-mp.add_key_binding("Ctrl+r", "copyRelativePath", copyRelativePath)
 mp.add_key_binding("Ctrl+s", "copySubtitle", copySubtitle)
 mp.add_key_binding("Ctrl+d", "copyDuration", copyDuration)
 mp.add_key_binding("Ctrl+m", "copyMetadata", copyMetadata)
