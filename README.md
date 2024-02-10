@@ -5,12 +5,13 @@ This script copies to clipboard the:
 - Full Filename Path
 - Current Video Time (HH:MM:SS.MS)
 - Current Displayed Subtitle Text
+- Video Metadata
 
 ## Installation
 
 Put the script `copyStuff.lua` in your scripts folder, usually in:
 - Windows: `"C:\Users\Username\AppData\Roaming\mpv\scripts"`.
-- Linux and Mac: `"~/.config/mpv/scripts/"`.
+- Linux and MacOS: `"~/.config/mpv/scripts/"`.
 
 To work, the script needs:
 - Windows: `Powershell`.
@@ -37,6 +38,5 @@ To work, the script needs:
 
 ![ss1](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_01.png)
 ![ss2](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_02.png)
-![ss3](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_03.png)
 ![ss4](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_04.png)
 ![ss5](https://raw.githubusercontent.com/rofe33/screenshots/main/mpv-copyStuff/example_05.png)
