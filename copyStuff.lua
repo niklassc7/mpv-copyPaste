@@ -77,11 +77,23 @@ end
 
 -- Copy Filename with Extension
 local function copyFilename()
-    local filename = string.format("%s", mp.get_property_osd("path"))
+    local filename = string.format("%s", mp.get_property_osd("filename"))
+    local extension = string.match(filename, "%.(%w+)$")
+
+    local succ_message = "Filename Copied to Clipboard"
+    local fail_message = "Failed to copy filename to clipboard"
+
+    if not extension then
+        filename = mp.get_property_osd("path")
+
+        succ_message = "URL Copied to Clipboard"
+        fail_message = "Failed to copy URL to clipboard"
+    end
+
     if set_clipboard(filename) then
-        mp.osd_message(string.format("Filename Copied to Clipboard: %s", filename))
+        mp.osd_message(string.format("%s: %s", succ_message, filename))
     else
-        mp.osd_message("Failed to copy filename to clipboard")
+        mp.osd_message(string.format("%s", fail_message))
     end
 end
 
