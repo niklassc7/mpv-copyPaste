@@ -100,9 +100,9 @@ end
 -- Copy Full Filename Path
 local function copyFullPath()
     if platform == WINDOWS then
-        full_path = string.format("%s\\%s", mp.get_property_osd("working-directory"), mp.get_property_osd("filename"))
+        full_path = string.format("%s\\%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
     else
-        full_path = string.format("%s/%s", mp.get_property_osd("working-directory"), mp.get_property_osd("filename"))
+        full_path = string.format("%s/%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
     end
 
     if set_clipboard(full_path) then
