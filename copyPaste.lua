@@ -63,7 +63,7 @@ local function get_clipboard_paste_cmd()
 end
 
 local function divmod(a, b)
-    return a / b, a % b
+	return a / b, a % b
 end
 
 local function set_clipboard(text)
@@ -104,93 +104,93 @@ end
 
 -- Copy Time
 local function copyTime()
-    local time_pos = mp.get_property_number("time-pos")
-    local minutes, remainder = divmod(time_pos, 60)
-    local hours, minutes = divmod(minutes, 60)
-    local seconds = math.floor(remainder)
-    local milliseconds = math.floor((remainder - seconds) * 1000)
-    local time = string.format("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
-    if set_clipboard(time) then
-        mp.osd_message(string.format("Time Copied to Clipboard: %s", time))
-    else
-        mp.osd_message("Failed to copy time to clipboard")
-    end
+	local time_pos = mp.get_property_number("time-pos")
+	local minutes, remainder = divmod(time_pos, 60)
+	local hours, minutes = divmod(minutes, 60)
+	local seconds = math.floor(remainder)
+	local milliseconds = math.floor((remainder - seconds) * 1000)
+	local time = string.format("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
+	if set_clipboard(time) then
+		mp.osd_message(string.format("Time Copied to Clipboard: %s", time))
+	else
+		mp.osd_message("Failed to copy time to clipboard")
+	end
 end
 
 -- Copy Filename with Extension
 local function copyFilename()
-    local filename = string.format("%s", mp.get_property_osd("filename"))
-    local extension = string.match(filename, "%.(%w+)$")
+	local filename = string.format("%s", mp.get_property_osd("filename"))
+	local extension = string.match(filename, "%.(%w+)$")
 
-    local succ_message = "Filename Copied to Clipboard"
-    local fail_message = "Failed to copy filename to clipboard"
+	local succ_message = "Filename Copied to Clipboard"
+	local fail_message = "Failed to copy filename to clipboard"
 
-    -- If filename doesn't have an extension then it is a URL.
-    if not extension then
-        filename = mp.get_property_osd("path")
+	-- If filename doesn't have an extension then it is a URL.
+	if not extension then
+		filename = mp.get_property_osd("path")
 
-        succ_message = "URL Copied to Clipboard"
-        fail_message = "Failed to copy URL to clipboard"
-    end
+		succ_message = "URL Copied to Clipboard"
+		fail_message = "Failed to copy URL to clipboard"
+	end
 
-    if set_clipboard(filename) then
-        mp.osd_message(string.format("%s: %s", succ_message, filename))
-    else
-        mp.osd_message(string.format("%s", fail_message))
-    end
+	if set_clipboard(filename) then
+		mp.osd_message(string.format("%s: %s", succ_message, filename))
+	else
+		mp.osd_message(string.format("%s", fail_message))
+	end
 end
 
 -- Copy Full Filename Path
 local function copyFullPath()
-    if platform == WINDOWS then
-        full_path = string.format("%s\\%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
-    else
-        full_path = string.format("%s/%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
-    end
+	if platform == WINDOWS then
+		full_path = string.format("%s\\%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
+	else
+		full_path = string.format("%s/%s", mp.get_property_osd("working-directory"), mp.get_property_osd("path"))
+	end
 
-    if set_clipboard(full_path) then
-        mp.osd_message(string.format("Full Filename Path Copied to Clipboard: %s", full_path))
-    else
-        mp.osd_message("Failed to copy full filename path to clipboard")
-    end
+	if set_clipboard(full_path) then
+		mp.osd_message(string.format("Full Filename Path Copied to Clipboard: %s", full_path))
+	else
+		mp.osd_message("Failed to copy full filename path to clipboard")
+	end
 end
 
 -- Copy Current Displayed Subtitle
 local function copySubtitle()
-    local subtitle = string.format("%s", mp.get_property_osd("sub-text"))
+	local subtitle = string.format("%s", mp.get_property_osd("sub-text"))
 
-    if subtitle == "" then
-        mp.osd_message("There are no displayed subtitles.")
-        return
-    end
+	if subtitle == "" then
+		mp.osd_message("There are no displayed subtitles.")
+		return
+	end
 
-    if set_clipboard(subtitle) then
-        mp.osd_message(string.format("Displayed Subtitle Copied to Clipboard: %s", subtitle))
-    else
-        mp.osd_message("Failed to copy displayed subtitle to clipboard")
-    end
+	if set_clipboard(subtitle) then
+		mp.osd_message(string.format("Displayed Subtitle Copied to Clipboard: %s", subtitle))
+	else
+		mp.osd_message("Failed to copy displayed subtitle to clipboard")
+	end
 end
 
 -- Copy Current Video Duration
 local function copyDuration()
-    local duration = string.format("%s", mp.get_property_osd("duration"))
+	local duration = string.format("%s", mp.get_property_osd("duration"))
 
-    if set_clipboard(duration) then
-        mp.osd_message(string.format("Video Duration Copied to Clipboard: %s", duration))
-    else
-        mp.osd_message("Failed to copy video duration to clipboard")
-    end
+	if set_clipboard(duration) then
+		mp.osd_message(string.format("Video Duration Copied to Clipboard: %s", duration))
+	else
+		mp.osd_message("Failed to copy video duration to clipboard")
+	end
 end
 
 -- Copy Current Video Metadata
 local function copyMetadata()
-    local metadata = string.format("%s", mp.get_property_osd("metadata"))
+	local metadata = string.format("%s", mp.get_property_osd("metadata"))
 
-    if set_clipboard(metadata) then
-        mp.osd_message(string.format("Video Metadata Copied to Clipboard: %s", metadata))
-    else
-        mp.osd_message("Failed to copy metadata to clipboard")
-    end
+	if set_clipboard(metadata) then
+		mp.osd_message(string.format("Video Metadata Copied to Clipboard: %s", metadata))
+	else
+		mp.osd_message("Failed to copy metadata to clipboard")
+	end
 end
 
 -- Paste clipboard, detect if it is a timestamp, filepath or URL
