@@ -27,7 +27,7 @@ To work, the script needs:
 ## Key bindings
 
 | Keys     | Description                                 |
-|----------+---------------------------------------------|
+|----------|---------------------------------------------|
 | `Ctrl+f` | Copy filename or URL                        |
 | `Ctrl+p` | Copy file path                              |
 | `Ctrl+t` | Copy timestamp                              |
