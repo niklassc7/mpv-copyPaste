@@ -83,25 +83,6 @@ end
 
 -- Gets content from clipboard
 local function get_clipboard()
-	mp.osd_message("Getting clipboard content")
-
-
-	-- local subprocess = {
-	-- 	name = "subprocess",
-	-- 	args = { "powershell", "-Command", "Get-Clipboard", "-Raw" },
-	-- 	playback_only = false,
-	-- 	capture_stdout = true,
-	-- 	capture_stderr = true
-	-- }
-
-
-	-- print("DEBUG: Starting subprocess")
-	-- r = mp.command_native(subprocess)
-	-- print("DEBUG: Got subprocess")
-	-- print("DEBUG: Status: "..r.status)
-	-- print("DEBUG: Content: "..r.stdout)
-
-
 	if (platform == UNIX and clipboard_paste_cmd) then
 		-- Read content of clipboard
 		local pipe = io.popen(clipboard_paste_cmd, "r")
@@ -119,17 +100,6 @@ local function get_clipboard()
 		mp.msg.error("Get_clipboard error")
 		return
 	end
-
-
-	-- Failed to get clipboard
-	if r.status < 0 then
-		mp.osd_message("Cannot get clipboard content")
-		print("Error(string): "..r.error_string)
-		print("Error(stderr): "..r.stderr)
-	end
-	clipboard_content = r.stdout
-
-	mp.osd_message(clipboard_content)
 end
 
 -- Copy Time
