@@ -8,38 +8,58 @@ require 'mp.msg'
 -- Current Video Duration
 -- Current Displayed Subtitle
 -- Video Metadata
+--
+-- Paste:
+-- Current Video Time
 
 WINDOWS = 2
 UNIX = 3
 
 local function platform_type()
-    local utils = require 'mp.utils'
-    local workdir = utils.to_string(mp.get_property_native("working-directory"))
-    if string.find(workdir, "\\") then
-        return WINDOWS
-    else
-        return UNIX
-    end
+	local utils = require 'mp.utils'
+	local workdir = utils.to_string(mp.get_property_native("working-directory"))
+	if string.find(workdir, "\\") then
+		return WINDOWS
+	else
+		return UNIX
+	end
 end
 
 local function command_exists(cmd)
-    local pipe = io.popen("type " .. cmd .. " > /dev/null 2> /dev/null; printf \"$?\"", "r")
-    exists = pipe:read() == "0"
-    pipe:close()
-    return exists
+	local pipe = io.popen("type " .. cmd .. " > /dev/null 2> /dev/null; printf \"$?\"", "r")
+	exists = pipe:read() == "0"
+	pipe:close()
+	return exists
 end
 
-local function get_clipboard_cmd()
-    if command_exists("xclip") then
-        return "xclip -silent -in -selection clipboard"
-    elseif command_exists("wl-copy") then
-        return "wl-copy"
-    elseif command_exists("pbcopy") then
-        return "pbcopy"
-    else
-        mp.msg.error("No supported clipboard command found")
-        return false
-    end
+local function get_clipboard_copy_cmd()
+	if command_exists("xclip") then
+		return "xclip -silent -in -selection clipboard"
+	elseif command_exists("wl-copy") then
+		return "wl-copy"
+	elseif command_exists("pbcopy") then
+		return "pbcopy"
+	else
+		mp.msg.error("No supported clipboard command found")
+		return false
+	end
+end
+
+local function get_clipboard_paste_cmd()
+	if command_exists("xclip") then
+		return "xclip -o -selection clipboard"
+	elseif command_exists("wl-copy") then
+		-- return "wl-copy"
+		mp.msg.error("TODO implement wl-copy")
+		return
+	elseif command_exists("pbcopy") then
+		-- return "pbcopy"
+		mp.msg.error("TODO implement pbcopy")
+		return
+	else
+		mp.msg.error("No supported clipboard command found")
+		return false
+	end
 end
 
 local function divmod(a, b)
@@ -47,18 +67,69 @@ local function divmod(a, b)
 end
 
 local function set_clipboard(text)
-    if platform == WINDOWS then
-        mp.commandv("run", "powershell", "set-clipboard", table.concat({'"', text, '"'}))
-        return true
-    elseif (platform == UNIX and clipboard_cmd) then
-        local pipe = io.popen(clipboard_cmd, "w")
-        pipe:write(text)
-        pipe:close()
-        return true
-    else
-        mp.msg.error("Set_clipboard error")
-        return false
-    end
+	if platform == WINDOWS then
+		mp.commandv("run", "powershell", "set-clipboard", table.concat({'"', text, '"'}))
+		return true
+	elseif (platform == UNIX and clipboard_copy_cmd) then
+		local pipe = io.popen(clipboard_copy_cmd, "w")
+		pipe:write(text)
+		pipe:close()
+		return true
+	else
+		mp.msg.error("Set_clipboard error")
+		return false
+	end
+end
+
+-- Gets content from clipboard
+local function get_clipboard()
+	mp.osd_message("Getting clipboard content")
+
+
+	-- local subprocess = {
+	-- 	name = "subprocess",
+	-- 	args = { "powershell", "-Command", "Get-Clipboard", "-Raw" },
+	-- 	playback_only = false,
+	-- 	capture_stdout = true,
+	-- 	capture_stderr = true
+	-- }
+
+
+	-- print("DEBUG: Starting subprocess")
+	-- r = mp.command_native(subprocess)
+	-- print("DEBUG: Got subprocess")
+	-- print("DEBUG: Status: "..r.status)
+	-- print("DEBUG: Content: "..r.stdout)
+
+
+	if (platform == UNIX and clipboard_paste_cmd) then
+		-- Read content of clipboard
+		local pipe = io.popen(clipboard_paste_cmd, "r")
+		clipboard_content = pipe:read("*a")
+		pipe:close()
+		-- mp.osd_message(clipboard_content)
+		return clipboard_content
+	elseif platform == WINDOWS then
+		-- TODO
+		mp.osd_message("Not implemented")
+		return
+		-- mp.commandv("run", "powershell", "get-clipboard", table.concat({'"', text, '"'}))
+		-- return true
+	else
+		mp.msg.error("Get_clipboard error")
+		return
+	end
+
+
+	-- Failed to get clipboard
+	if r.status < 0 then
+		mp.osd_message("Cannot get clipboard content")
+		print("Error(string): "..r.error_string)
+		print("Error(stderr): "..r.stderr)
+	end
+	clipboard_content = r.stdout
+
+	mp.osd_message(clipboard_content)
 end
 
 -- Copy Time
@@ -152,9 +223,25 @@ local function copyMetadata()
     end
 end
 
+-- Paste clipboard, detect if it is a timestamp, filepath or URL
+local function paste()
+	local clipboard_content = get_clipboard()
+
+	-- Check if clipboard content is a timestamp
+	local hours, minutes, seconds, milliseconds = string.match(clipboard_content, "(%d+):(%d+):(%d+).(%d+)")
+	if hours and minutes and seconds and milliseconds then
+		local time_pos = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000
+		mp.set_property("time-pos", time_pos)
+		mp.osd_message(string.format("Pasted Time: %02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds))
+		return
+	end
+
+end
+
 platform = platform_type()
 if platform == UNIX then
-    clipboard_cmd = get_clipboard_cmd()
+	clipboard_copy_cmd = get_clipboard_copy_cmd()
+	clipboard_paste_cmd = get_clipboard_paste_cmd()
 end
 
 -- Key-Bindings
@@ -164,3 +251,5 @@ mp.add_key_binding("Ctrl+p", "copyFullPath", copyFullPath)
 mp.add_key_binding("Ctrl+s", "copySubtitle", copySubtitle)
 mp.add_key_binding("Ctrl+d", "copyDuration", copyDuration)
 mp.add_key_binding("Ctrl+m", "copyMetadata", copyMetadata)
+
+mp.add_key_binding("Ctrl+v", "pasteTime", paste)

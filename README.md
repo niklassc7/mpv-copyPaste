@@ -1,4 +1,4 @@
-# mpv-copyStuff
+# mpv-copyPaste
 
 This script copies to clipboard the:
 - Filename (With Extension) or URL Link
@@ -7,16 +7,21 @@ This script copies to clipboard the:
 - Current Displayed Subtitle Text
 - Video Metadata
 
+On `Ctrl+V` it autodetects and pastes:
+- Timestamps
+- File paths (TODO)
+- URLs (TODO)
+
 ## Installation
 
 Put the script `copyStuff.lua` in your scripts folder, usually in:
-- Windows: `"C:\Users\Username\AppData\Roaming\mpv\scripts"`.
 - Linux and MacOS: `"~/.config/mpv/scripts/"`.
+- Windows: `"C:\Users\Username\AppData\Roaming\mpv\scripts"`.
 
 To work, the script needs:
-- Windows: `Powershell`.
 - Linux/X11: `xclip`.
 - Linux/Wayland : `xclip` or `wl-clipboard`.
+- Windows: `Powershell`.
 - MacOS: `pbcopy` (not tested).
 
 ## Hotkeys
@@ -31,6 +36,8 @@ To work, the script needs:
 | **Current Displayed Subtitle Text**  | **CTRL+s** |
 | **Video Duration**                   | **CTRL+d** |
 | **Video Metadata**                   | **CTRL+m** |
+
+`Ctrl+v` pastes clipboard.
 
 </div>
 
