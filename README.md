@@ -24,22 +24,17 @@ To work, the script needs:
 - Windows: `Powershell`.
 - MacOS: `pbcopy` (not tested).
 
-## Hotkeys
+## Key bindings
 
-<div align="center">
-
-| What is Copied                       | Hotkey     |
-| ------------------------------------ | ---------- |
-| **Filename or URL Link**             | **CTRL+f** |
-| **Full Filename Path**               | **CTRL+p** |
-| **Current Video Time (HH:MM:SS.MS)** | **CTRL+t** |
-| **Current Displayed Subtitle Text**  | **CTRL+s** |
-| **Video Duration**                   | **CTRL+d** |
-| **Video Metadata**                   | **CTRL+m** |
-
-`Ctrl+v` pastes clipboard.
-
-</div>
+| Keys     | Description                                 |
+|----------+---------------------------------------------|
+| `Ctrl+f` | Copy filename or URL                        |
+| `Ctrl+p` | Copy file path                              |
+| `Ctrl+t` | Copy timestamp                              |
+| `Ctrl+s` | Copy currently visible subtitle             |
+| `Ctrl+d` | Copy video duration                         |
+| `Ctrl+m` | Copy metadata                               |
+| `Ctrl+v` | Paste and autodetect timestamps, path, URLs |
 
 # Screenshots
 
